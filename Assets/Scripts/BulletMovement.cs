@@ -10,13 +10,7 @@ public class BulletMovement : MonoBehaviour
     {
         velocity = Vector3.forward;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Asteroid")
-        {
-            collision.gameObject.SetActive(false);
-        }
-    }
+  
 
     // Update is called once per frame
     void Update()

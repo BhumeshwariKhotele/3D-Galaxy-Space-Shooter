@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class BulletSpawn : MonoBehaviour
 {
-    public GameObject bullet; //reference of the bullet
+
+
+    Rigidbody tempRigidbody;
+    //public GameObject bullet; //reference of the bullet
 //AudioSource bulletaudio;
 
     void Start()
     {
-     //   bulletaudio = GameObject.Find("SoundManager").GetComponent<AudioSource>();
+        tempRigidbody = GetComponentInParent<Rigidbody>();
+        //   bulletaudio = GameObject.Find("SoundManager").GetComponent<AudioSource>();
     }
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            GameObject bulletRef = Instantiate(bullet);
-            bulletRef.transform.position = transform.position;
-           // bulletaudio.Play();
+            BulletPooling.Instance.SpawnBullet();
+            StartCoroutine("DeactivateBullet");
         }
 
     }
 
+    IEnumerator DeactivateBullet()
+    {
+        yield return new WaitForSeconds(5);
+        BulletPooling.Instance.AddToBulletPool(tempRigidbody.gameObject);
+    }
 
 }
