@@ -5,7 +5,7 @@ public class SkyboxChanger : MonoBehaviour
 {
     public Material[] Skyboxes;
     private Dropdown _dropdown;
-    private float rotateSpeed = 3.0f;
+    private float rotateSpeed = 10.0f;
     public void Awake()
     {
         _dropdown = GetComponent<Dropdown>();

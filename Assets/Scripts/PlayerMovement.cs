@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
         float horizantal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         rb.velocity = new Vector2(horizantal, vertical) * PlayerSpeed;
-        rb.position = new Vector3(Mathf.Clamp(rb.position.x, localPlayer.xMin, localPlayer.xMax), Mathf.Clamp(rb.position.y, localPlayer.yMin, localPlayer.yMax));
+        rb.position = new Vector2(Mathf.Clamp(rb.position.x, localPlayer.xMin, localPlayer.xMax), Mathf.Clamp(rb.position.y, localPlayer.yMin, localPlayer.yMax));
     }
 }
 
