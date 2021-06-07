@@ -20,16 +20,14 @@ public class EnemyMovement: MonoBehaviour
         myTransform.Translate(Vector3.back * speed * Time.deltaTime);
 
     }
-  /*  private void OnBecameInvisible()
-    {
-        Destroy(this.gameObject);
-    }*/
+ 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "player")
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 }
