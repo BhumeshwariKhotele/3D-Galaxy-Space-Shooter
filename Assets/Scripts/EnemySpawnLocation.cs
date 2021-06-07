@@ -17,10 +17,10 @@ public class EnemySpawnLocation : MonoBehaviour
     {
         while (true)
         {
-            Vector3 spawnPos1 = new Vector3(Random.Range(-100, 100), Random.Range(-20, 20), 100);
+            Vector3 spawnPos1 = new Vector3(Random.Range(-100, 100), Random.Range(-50, 50), 150);
             Instantiate(enemy1, spawnPos1, Quaternion.identity);
 
-            Vector3 spawnPos2 = new Vector3(Random.Range(-100, 100), Random.Range(-20, 20), 100);
+            Vector3 spawnPos2 = new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), 150);
             Instantiate(enemy2, spawnPos2, Quaternion.identity);
             yield return new WaitForSeconds(2.0f);
 

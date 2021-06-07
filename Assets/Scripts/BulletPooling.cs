@@ -5,8 +5,8 @@ using UnityEngine;
 public class BulletPooling: MonoBehaviour
 {
     public GameObject Bullet;
-    public GameObject playerObj;
- 
+   public GameObject currentbullet;
+
     Stack<GameObject> bulletPool = new Stack<GameObject>();  // created stack for bullet
 
     private static BulletPooling instance;
@@ -24,18 +24,25 @@ public class BulletPooling: MonoBehaviour
 
     }
 
-     private void Start()
+    void Update()
     {
-      PlayerMovement  playerObj = gameObject.GetComponent<PlayerMovement>();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            SpawnBullet();
+        }
+
+    }
+    private void Start()
+    {
+  
     }
 
-    void CreateBullets(int value)//to create the pool of tiles
+   void CreateBullets()//to create the pool of tiles
     {
-        for (int i = 0; i < value; i++)
-        {
+        
             bulletPool.Push(Instantiate(Bullet));
             bulletPool.Peek().SetActive(false);
-        }
+            bulletPool.Peek().name = "Bullet";
 
     }
 
@@ -48,14 +55,13 @@ public class BulletPooling: MonoBehaviour
 
     public void SpawnBullet()
     {
-        if(bulletPool.Count==0)
+        if (bulletPool.Count == 0)
         {
-            CreateBullets(20);
+            CreateBullets();
         }
-
         GameObject temp = bulletPool.Pop();
         temp.SetActive(true);
-        temp.transform.position = playerObj.transform.position;
-     
+        temp.transform.position = transform.position;
+        currentbullet = temp;
     }
 }

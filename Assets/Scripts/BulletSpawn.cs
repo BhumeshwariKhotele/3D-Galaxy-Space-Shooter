@@ -5,31 +5,42 @@ using UnityEngine;
 public class BulletSpawn : MonoBehaviour
 {
 
-
+    public Vector3 velocity;
     Rigidbody tempRigidbody;
-    //public GameObject bullet; //reference of the bullet
-//AudioSource bulletaudio;
+    public float bulletSpeed;
+    GameObject temp; //reference of the bullet
+                     //AudioSource bulletaudio;
 
     void Start()
     {
+        velocity = Vector3.forward;
         tempRigidbody = GetComponentInParent<Rigidbody>();
         //   bulletaudio = GameObject.Find("SoundManager").GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        this.transform.Translate(velocity);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Asteroid" || collision.gameObject.name == "Alien")
         {
-            BulletPooling.Instance.SpawnBullet();
+            Destroy(collision.gameObject);
+        }
+        else
+        {
             StartCoroutine("DeactivateBullet");
         }
-
     }
 
     IEnumerator DeactivateBullet()
     {
-        yield return new WaitForSeconds(5);
-        BulletPooling.Instance.AddToBulletPool(tempRigidbody.gameObject);
-    }
-
+        yield return new WaitForSeconds(1f);
+        if (tempRigidbody.gameObject.name == "Bullet")
+        {
+            BulletPooling.Instance.AddToBulletPool(tempRigidbody.gameObject);
+        }
+   }
 }
