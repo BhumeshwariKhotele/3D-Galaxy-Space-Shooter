@@ -56,8 +56,8 @@ GameObject:
   - component: {fileID: 2150617576663311570}
   - component: {fileID: 2159577295133688820}
   - component: {fileID: 2138396432096275428}
-  - component: {fileID: 2138396432096275435}
   - component: {fileID: -2939243095020830552}
+  - component: {fileID: 578204132}
   m_Layer: 0
   m_Name: Bomb 1
   m_TagString: Untagged
@@ -72,7 +72,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137419090214386958}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -140,25 +140,11 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 118
   m_CollisionDetection: 0
---- !u!114 &2138396432096275435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137419090214386958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6206abe3dffe6c4dba62e8d7a66f9e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  bulletSpeed: 10
 --- !u!136 &-2939243095020830552
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -173,6 +159,21 @@ CapsuleCollider:
   m_Height: 1.4462869
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: -0.000000059604645}
+--- !u!114 &578204132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137419090214386958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9157bf7935a498c46959796f1d3f127b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParticleEffectPrefab: {fileID: 4280639982860016410, guid: e5ed126d6d253f0459e29050a2c45de8,
+    type: 3}
+  ScoreText: {fileID: 0}
 --- !u!1 &2137437818627991418
 GameObject:
   m_ObjectHideFlags: 0

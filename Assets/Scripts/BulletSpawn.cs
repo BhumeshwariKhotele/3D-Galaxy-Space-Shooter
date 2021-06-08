@@ -4,43 +4,61 @@ using UnityEngine;
 
 public class BulletSpawn : MonoBehaviour
 {
+    public GameObject bullet;
+    public GameObject currentbullet;
+    Stack<GameObject> BulletPool = new Stack<GameObject>();
+    private static BulletSpawn instance;
 
-    public Vector3 velocity;
-    Rigidbody tempRigidbody;
-    public float bulletSpeed;
-    GameObject temp; //reference of the bullet
-                     //AudioSource bulletaudio;
+    public static BulletSpawn Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = GameObject.FindObjectOfType<BulletSpawn>();
+            }
+            return instance;
+        }
+    }
 
+    // Start is called before the first frame update
     void Start()
     {
-        velocity = Vector3.forward;
-        tempRigidbody = GetComponentInParent<Rigidbody>();
-        //   bulletaudio = GameObject.Find("SoundManager").GetComponent<AudioSource>();
+
     }
 
+    // Update is called once per frame
     void Update()
     {
-        this.transform.Translate(velocity);
-    }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            BulletCreation();
+        }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "Asteroid" || collision.gameObject.name == "Alien")
-        {
-            Destroy(collision.gameObject);
-        }
-        else
-        {
-            StartCoroutine("DeactivateBullet");
-        }
     }
-
-    IEnumerator DeactivateBullet()
+    public void CreatePool()
     {
-        yield return new WaitForSeconds(1f);
-        if (tempRigidbody.gameObject.name == "Bullet")
+        
+            BulletPool.Push(Instantiate(bullet));
+            BulletPool.Peek().SetActive(false);
+            BulletPool.Peek().name = "Bullet";
+        
+
+    }
+    public void AddToPool(GameObject bullettemp)
+    {
+        BulletPool.Push(bullettemp);
+        BulletPool.Peek().SetActive(false);
+    }
+    public void BulletCreation()
+    {
+        if (BulletPool.Count == 0)
         {
-            BulletPooling.Instance.AddToBulletPool(tempRigidbody.gameObject);
+            CreatePool();
         }
-   }
+        GameObject temp = BulletPool.Pop();
+        temp.SetActive(true);
+        temp.transform.position = transform.position;
+        currentbullet = temp;
+    }
 }

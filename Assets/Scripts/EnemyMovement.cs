@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyMovement: MonoBehaviour
 {
     private Transform myTransform;
-    private float speed = 50.0f;
-
+    private float speed = 10.0f;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,10 @@ public class EnemyMovement: MonoBehaviour
     void Update()
     {
         myTransform.Translate(Vector3.back * speed * Time.deltaTime);
-
+        if(transform.position.z<-20f)
+        {
+            Destroy(this.gameObject);
+        } 
     }
  
 
@@ -28,6 +32,8 @@ public class EnemyMovement: MonoBehaviour
         {
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
+            SceneManager.LoadScene(2);
+
         }
     }
 }
