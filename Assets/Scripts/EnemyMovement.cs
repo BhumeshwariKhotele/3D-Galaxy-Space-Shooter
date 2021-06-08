@@ -7,11 +7,13 @@ public class EnemyMovement: MonoBehaviour
 {
     private Transform myTransform;
     private float speed = 10.0f;
- 
+    public AudioClip sound;
+    AudioSource enemyaudio;
     // Start is called before the first frame update
     void Start()
     {
         myTransform = this.transform;
+        enemyaudio = GetComponent<AudioSource>();
 
     }
 
@@ -30,10 +32,14 @@ public class EnemyMovement: MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            enemyaudio.clip = sound;
+            enemyaudio.Play();
+
             Destroy(this.gameObject);
             Destroy(collision.gameObject);
             SceneManager.LoadScene(2);
-
+           
         }
+      
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 
 public class BulletMovement : MonoBehaviour
@@ -9,13 +9,15 @@ public class BulletMovement : MonoBehaviour
     Rigidbody rbbullet;
     float bulletspeed = 50.0f;
     public GameObject ParticleEffectPrefab;
-    int Score;
-
+    public AudioClip sound;
+    AudioSource Bulletaudio;
+    ScoreBoard scoreboard;
     // Start is called before the first frame update
     void Start()
     {
         rbbullet = GetComponent<Rigidbody>();
-       
+            Bulletaudio = GetComponent<AudioSource>();
+        scoreboard = GameObject.Find("ScoreDisplay").GetComponent<ScoreBoard>();
     }
 
     // Update is called once per frame
@@ -23,30 +25,38 @@ public class BulletMovement : MonoBehaviour
     {
         rbbullet.velocity = Vector3.forward * bulletspeed;
 
-
+        if(scoreboard.score==50)
+        {
+            bulletspeed = 100.0f;
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Asteroid"))
         {
-            Score += 5;
+            Bulletaudio.clip = sound;
+            Bulletaudio.Play();
+            scoreboard.Increment(5);
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
             Instantiate(ParticleEffectPrefab, transform.position, Quaternion.identity);
         }
-        else if (collision.gameObject.CompareTag("Alien"))
+       else  if (collision.gameObject.CompareTag("Alien"))
         {
-            Score += 10;
+            Bulletaudio.clip = sound;
+            Bulletaudio.Play();
+            scoreboard.Increment(10);
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
             Instantiate(ParticleEffectPrefab, transform.position, Quaternion.identity);
         }
+
         else
         {
 
             StartCoroutine("BulletAddToPool");
         }
- 
+     
     }
     IEnumerator BulletAddToPool()
     {

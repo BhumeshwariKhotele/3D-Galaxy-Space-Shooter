@@ -8,6 +8,8 @@ public class BulletSpawn : MonoBehaviour
     public GameObject currentbullet;
     Stack<GameObject> BulletPool = new Stack<GameObject>();
     private static BulletSpawn instance;
+    AudioSource BulletSound;
+    public AudioClip sound;
 
     public static BulletSpawn Instance
     {
@@ -24,7 +26,7 @@ public class BulletSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+       BulletSound =GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,8 @@ public class BulletSpawn : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            BulletSound.clip = sound;
+            BulletSound.Play();
             BulletCreation();
         }
 
