@@ -8,7 +8,8 @@ public class BulletMovement : MonoBehaviour
 {
     Rigidbody rbbullet;
     float bulletspeed = 50.0f;
-    public GameObject ParticleEffectPrefab;
+    public GameObject pinkParticleEffect;
+    public GameObject yellowParticleEffect;
     public AudioClip sound;
     AudioSource Bulletaudio;
     ScoreBoard scoreboard;
@@ -16,7 +17,7 @@ public class BulletMovement : MonoBehaviour
     void Start()
     {
         rbbullet = GetComponent<Rigidbody>();
-            Bulletaudio = GetComponent<AudioSource>();
+        Bulletaudio = GetComponent<AudioSource>();
         scoreboard = GameObject.Find("ScoreDisplay").GetComponent<ScoreBoard>();
     }
 
@@ -39,7 +40,7 @@ public class BulletMovement : MonoBehaviour
             scoreboard.Increment(5);
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
-            Instantiate(ParticleEffectPrefab, transform.position, Quaternion.identity);
+            Instantiate(pinkParticleEffect, transform.position, Quaternion.identity);
         }
        else  if (collision.gameObject.CompareTag("Alien"))
         {
@@ -48,7 +49,7 @@ public class BulletMovement : MonoBehaviour
             scoreboard.Increment(10);
             Destroy(collision.gameObject);
             Destroy(this.gameObject);
-            Instantiate(ParticleEffectPrefab, transform.position, Quaternion.identity);
+            Instantiate(yellowParticleEffect, transform.position, Quaternion.identity);
         }
 
         else

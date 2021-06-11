@@ -172,7 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9157bf7935a498c46959796f1d3f127b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParticleEffectPrefab: {fileID: 4280639982860016410, guid: e5ed126d6d253f0459e29050a2c45de8,
+  pinkParticleEffect: {fileID: 4280639982860016410, guid: e5ed126d6d253f0459e29050a2c45de8,
+    type: 3}
+  yellowParticleEffect: {fileID: 5720044101449941334, guid: bfd1850a99d20c94285d36a8f042cc44,
     type: 3}
   sound: {fileID: 8300000, guid: 8d1a4906120ec6d4587f254523a37a7b, type: 3}
 --- !u!82 &1267061726602223068
